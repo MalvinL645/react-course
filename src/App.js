@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
+import ChangeName from './changeName';
 
 function App() {
   const [name, setName] = useState('');
@@ -24,14 +25,5 @@ function App() {
     </HelmetProvider>
   );
 }
-
-const ChangeName = (props) => {
-  const { name } = props;
-  return (
-    <div className="">
-      <h1>My name is {name}</h1>
-    </div>
-  );
-};
 
 export default App;
