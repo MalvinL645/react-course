@@ -1,10 +1,15 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import './App.css';
+import './assets/css/App.css';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
-import experienceList from './experienceList';
-import skillList from './skillList';
+import experienceList from './assets/data/experienceList';
+import skillList from './assets/data/skillList';
+import accountList from './assets/data/accountList';
+
+const photo = require('./assets/img/foto.png');
+const webIcon = require('./assets/img/icon.png');
 
 const App = () => {
   return (
@@ -13,8 +18,7 @@ const App = () => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Alvin!</title>
-        <link rel="icon" href="assets/img/icon.png" />
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="icon" href={webIcon} />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
           rel="stylesheet"
@@ -53,38 +57,22 @@ const App = () => {
           </h1>
           <p>Front-End Developer.</p>
           <div className="main__contact">
-            <a
-              href="https://bit.ly/30pzdDt"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-whatsapp" />
-            </a>
-            <a
-              href="https://github.com/MalvinL645"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-github" />
-            </a>
-            <a
-              href="https://www.instagram.com/_malvinf/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-instagram" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/muhammadalvin/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fab fa-linkedin" />
-            </a>
+            {accountList.map((acc) => {
+              return (
+                <a
+                  href={acc.accountLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={acc.accountName}
+                >
+                  <i className={`fab fa-${acc.accountName}`} />
+                </a>
+              );
+            })}
           </div>
         </div>
         <div className="main__img">
-          <img src="assets/img/foto.png" alt="" />
+          <img src={photo} alt="" />
         </div>
       </section>
       <section className="container about">
@@ -109,7 +97,7 @@ const App = () => {
         <div className="skills__container">
           {skillList.map((skill) => {
             return (
-              <div className="skills__wrap">
+              <div className="skills__wrap" key={skill.skillName}>
                 <div className="skills__name" id={skill.skillName}>
                   <p>{skill.skillName}</p>
                 </div>
@@ -131,7 +119,7 @@ const App = () => {
           <div className="experiences__timeline">
             {experienceList.map((exp, i) => {
               return i % 2 === 0 ? (
-                <div className="timeline--left">
+                <div className="timeline--left" key={i}>
                   <h4>{exp.experienceTitle}</h4>
                   <p>{exp.experienceDesc}</p>
                   <p>
@@ -147,7 +135,7 @@ const App = () => {
                   </p>
                 </div>
               ) : (
-                <div className="timeline--right">
+                <div className="timeline--right" key={i}>
                   <h4>{exp.experienceTitle}</h4>
                   <p>{exp.experienceDesc}</p>
                   <p>
